@@ -67,6 +67,14 @@ into the {body} of the default.hbs template --}}
                     class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Twitter">
                     <span class="icon-twitter" aria-hidden="true"></span>
                   </a>
+                  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{url absolute='true'}}"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <span class="icon-linkedin" aria-hidden="true"></span>
+                  </a>
+                  <a href="https://reddit.com/submit?url={{url absolute='true'}}&title={{encode title}}"
+                    class="m-icon-button filled in-share" target="_blank" rel="noopener" aria-label="Reddit">
+                    <span class="icon-reddit" aria-hidden="true"></span>
+                  </a>
                   <button class="m-icon-button filled in-share progress js-scrolltop" aria-label="{{t "Scroll to top"}}">
                     <span class="icon-arrow-top" aria-hidden="true"></span>
                     <svg aria-hidden="true">
@@ -92,8 +100,15 @@ into the {body} of the default.hbs template --}}
             </div>
           </div>
         </div>
+
+        {{!-- If you want to embed comments, this is a good place to do it! --}}
+          <section class="m-comments">
+            <div class="fb-comments" data-href="{{url absolute="true"}}" data-width="100%" data-numposts="10" data-colorscheme="dark"></div>
+            {{!-- <div class="fb-comments" data-href="https://aba-blog.xyz/sex-education-2016/" data-numposts="10" data-colorscheme="dark"></div> --}}
+          </section>
+
         {{!-- Email subscribe form at the bottom of the page --}}
-        {{#if @labs.members}}
+        {{!-- {{#if @labs.members}}
           <section class="m-subscribe-section js-newsletter">
             <div class="l-wrapper in-post">
               <div class="m-subscribe-section__content">
@@ -109,76 +124,8 @@ into the {body} of the default.hbs template --}}
               </div>
             </div>
           </section>
-        {{/if}}
-        <section class="m-author">
-          <div class="m-author__content">
-            <div class="m-author__picture">
-              <a href="{{primary_author.url}}" class="m-author-picture" aria-label="{{primary_author.name}}">
-                {{#if primary_author.profile_image}}
-                  <div style="background-image: url({{primary_author.profile_image}});"></div>
-                {{else}}
-                  <div style="background-image: url({{asset "images/default-avatar-square-small.jpg"}});"></div>
-                {{/if}}
-              </a>
-            </div>
-            <div class="m-author__info">
-              <h4 class="m-author__name">
-                <a href="{{primary_author.url}}">{{primary_author.name}}</a>
-              </h4>
-              {{#has author="count:>1"}}
-                <p class="m-small-text in-author-along-with">
-                  {{authors separator=", " prefix=(t "Among with no break line") from="2"}}
-                </p>
-              {{/has}}
-              {{#if primary_author.bio}}
-                <p class="m-author__bio">{{primary_author.bio}}</p>
-              {{/if}}
-              <ul class="m-author-links">
-                {{#if primary_author.website}}
-                  <li>
-                    <a href="{{primary_author.website}}" target="_blank" rel="noopener" aria-label="{{t "Website"}}">
-                      <span class="icon-globe" aria-hidden="true"></span>
-                    </a>
-                  </li>
-                {{/if}}
-                {{#if primary_author.facebook}}
-                  <li>
-                    <a href="https://facebook.com/{{primary_author.facebook}}" target="_blank" rel="noopener" aria-label="Facebook">
-                      <span class="icon-facebook" aria-hidden="true"></span>
-                    </a>
-                  </li>
-                {{/if}}
-                {{#if primary_author.twitter}}
-                  <li>
-                    <a href="https://twitter.com/{{primary_author.twitter}}" target="_blank" rel="noopener" aria-label="Twitter">
-                      <span class="icon-twitter" aria-hidden="true"></span>
-                    </a>
-                  </li>
-                {{/if}}
-              </ul>
-            </div>
-          </div>
-        </section>
-        {{!-- If you want to embed comments, this is a good place to do it! --}}
-        {{!--
-          <section class="m-comments">
-            <div class="m-load-comments__iframe l-wrapper in-comments js-comments-iframe">
-              <div id="disqus_thread"></div>
-              <script>
-                var disqus_config = function () {
-                  this.page.url = "{{url absolute="true"}}";
-                  this.page.identifier = "ghost-{{comment_id}}"
-                };
-                (function () {
-                  var d = document, s = d.createElement('script');
-                  s.src = 'https://CHANGETHIS.disqus.com/embed.js';
-                  s.setAttribute('data-timestamp', +new Date());
-                  (d.head || d.body).appendChild(s);
-                })();
-              </script>
-            </div>
-          </section>
-        --}}
+        {{/if}} --}}
+
       {{/post}}
       {{!-- Related posts --}}
       {{#if post.tags.length}}
